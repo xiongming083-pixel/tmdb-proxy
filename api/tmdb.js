@@ -1,3 +1,4 @@
+const TMDB_API_KEY = process.env.TMDB_API_KEY || 'aab6759c67bf26b88e3acbe54c5b9917';
 const axios = require('axios');
 const TMDB_BASE_URL = 'https://api.themoviedb.org';
 
@@ -67,7 +68,8 @@ module.exports = async (req, res) => {
         }
 
         // 构建 TMDB 请求 URL
-        const tmdbUrl = `${TMDB_BASE_URL}${fullPath}`;
+        const urlConnector = fullPath.includes('?') ? '&' : '?';
+        const tmdbUrl = `${TMDB_BASE_URL}${fullPath}${urlConnector}api_key=${TMDB_API_KEY}`;
 
         // 构建请求配置
         const config = {};
